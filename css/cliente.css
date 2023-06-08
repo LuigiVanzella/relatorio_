@@ -1,0 +1,53 @@
+body{
+    background-image:url("imobiliaria-uniao.jpg");
+    background-size: 95%;
+    font-family: 'poppins',sans-serif;
+    color: rgb(0, 0, 0);
+}
+
+header{
+    text-align: center;
+}
+article{
+    background-color: rgba(255, 0, 0, 0.872);
+    width: 500px;
+    margin-left: 50%;
+    transform: translate(-50%);
+    border: black solid 2px;
+    
+}
+.principal{
+    padding: 15px;
+    text-align: center;
+}
+form{
+    margin-top: 50px;
+}
+label{
+    display: block;
+}
+input{
+    width: 50%;
+    font-size: 16px;
+    color: #2f002c;
+    margin-bottom: 30px;
+    border: none;
+    border-bottom: 2px solid #2f002c;
+    background: transparent;
+}
+select{
+    width: 50%;
+    font-size: 16px;
+    color: #2f002c;
+    margin-bottom: 30px;
+    border: none;
+    border-bottom: 2px solid #2f002c;
+    background: transparent;
+}
+.botao{
+    margin-left: 50%;
+    transform: translate(-50%);
+}
+#data{
+    margin-bottom: 15px;
+}

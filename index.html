@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatorio</title>
+    <link rel="stylesheet" href="css/cliente.css">
+        <style>
+            article{
+                width: 1550px;
+            }
+            
+            table{
+            margin-top: 20px;
+            border-collapse: collapse;
+            color: black;
+            width: 90%;
+            margin-left: 50%;
+            transform: translate(-50%);
+            }
+            th, td{
+                border: 2px solid black;
+                padding: 8px;
+                text-align: center;
+            }
+            th{
+                background-color: red;
+            }
+            td{
+                background-color: rgba(255, 0, 0, 0.872);
+            }
+        </style>
+    <script>
+
+        let resgatarCliente = localStorage.getItem("vetorCliente");
+        let cliente = JSON.parse(resgatarCliente);
+        
+        let resgatarImovel = localStorage.getItem("vetorImovel");
+        let imovel = JSON.parse(resgatarImovel);
+
+        let resgatarAluguel = localStorage.getItem("vetorAluguel");
+        let Aluguel = JSON.parse(resgatarAluguel);  
+        
+        function NumeroTelefone(){
+            
+            let TelefonesX = document.getElementById("telefoneX").value;
+
+
+            //criando tabela
+            let table = document.createElement("table");
+            let thead = document.createElement("thead");
+            let tbody = document.createElement("tbody");
+
+            //criando o cabecalho 
+            let titulo = document.createElement("tr");
+            for(const prop in cliente[0]){
+                let th = document.createElement("th");
+                th.textContent = prop;
+                titulo.appendChild(th);
+            }
+            thead.appendChild(titulo);
+            
+            for(let i=0; i<cliente.length; i++){
+                if (cliente[i].telefone.length >= TelefonesX){
+                    
+                    let linha = document.createElement("tr");
+    
+                    for (const prop in cliente[i]){
+                        let td = document.createElement("td");
+                        td.textContent = cliente[i][prop];
+                        linha.appendChild(td);
+                    }
+                    tbody.appendChild(linha);
+                }
+            }
+            table.appendChild(thead);
+            table.appendChild(tbody);
+
+            let print = document.getElementById("ForTelefone");
+            print.innerHTML = "";
+            print.appendChild(table);
+            
+        }
+
+
+        function seguranca(){
+            
+
+            let StatusSeguranca = document.getElementById("seguranca").value;
+
+            //criando tabela
+            let table = document.createElement("table");
+            let thead = document.createElement("thead");
+            let tbody = document.createElement("tbody");
+
+            //criando o cabecalho 
+            let titulo = document.createElement("tr");
+            for(const prop in imovel[0]){
+                let th = document.createElement("th");
+                th.textContent = prop;
+                titulo.appendChild(th);
+            }
+            thead.appendChild(titulo);
+            if (StatusSeguranca == "Portaria")
+                for(let i=0; i<imovel.length; i++){
+                    if (imovel[i].seguranca == "Portaria"){
+                        
+                        let linha = document.createElement("tr");
+        
+                        for (const prop in imovel[i]){
+                            let td = document.createElement("td");
+                            td.textContent = imovel[i][prop];
+                            linha.appendChild(td);
+                        }
+                        tbody.appendChild(linha);
+                    }
+                }
+            
+            if (StatusSeguranca == "GuardaNoturno")
+                for(let i=0; i<imovel.length; i++){
+                    if (imovel[i].seguranca == "GuardaNoturno"){
+                        
+                        let linha = document.createElement("tr");
+        
+                        for (const prop in imovel[i]){
+                            let td = document.createElement("td");
+                            td.textContent = imovel[i][prop];
+                            linha.appendChild(td);
+                        }
+                        tbody.appendChild(linha);
+                    }
+                }
+            
+            if (StatusSeguranca == "PortariaEGuarda")
+                for(let i=0; i<imovel.length; i++){
+                    if (imovel[i].seguranca == "PortariaEGuarda"){
+                        
+                        let linha = document.createElement("tr");
+        
+                        for (const prop in imovel[i]){
+                            let td = document.createElement("td");
+                            td.textContent = imovel[i][prop];
+                            linha.appendChild(td);
+                        }
+                        tbody.appendChild(linha);
+                    }
+                }
+
+            if (StatusSeguranca == "zero")
+                for(let i=0; i<imovel.length; i++){
+                    if (imovel[i].seguranca == "zero"){
+                        
+                        let linha = document.createElement("tr");
+        
+                        for (const prop in imovel[i]){
+                            let td = document.createElement("td");
+                            td.textContent = imovel[i][prop];
+                            linha.appendChild(td);
+                        }
+                        tbody.appendChild(linha);
+                    }
+                }
+
+            table.appendChild(thead);
+            table.appendChild(tbody);
+
+            let print = document.getElementById("ForSeguranca");
+            print.innerHTML = "";
+            print.appendChild(table);
+            
+
+            
+        }
+
+        function data(){
+
+            let inicio = document.getElementById("inicio").value;
+            let fim = document.getElementById("fim").value;
+            let str = "";
+            for(let i=0; i<Aluguel.length;i++){
+                if (Aluguel[i].data_entrada > inicio && Aluguel[i].data_entrada < fim){
+                    let findCliente = Aluguel[i].cpf;
+                    let findImovel = Aluguel[i].codigo;
+
+                    for(let j=0; j<cliente.length; j++){
+                        if(findCliente == cliente[j].cpf){
+                            str += "\nNOME: " + cliente[j].nome +
+                                    "\nCPF: " + Aluguel[j].cpf;
+                                    
+                        }
+                    }
+                    for(let j=0; j<imovel.length; j++){
+                        if(findImovel == imovel[j].codigo){
+                            str += "\nCODIGO: " + imovel[j].codigo + 
+                            "\nDESCRIÇÃO: " + imovel[j].descricao + 
+                            "\nRUA: " + imovel[j].rua + 
+                            "\nNUMERO: " + imovel[j].numero + 
+                            "\nBAIRRO: " + imovel[j].bairro + 
+                            "\nCIDADE: " + imovel[j].cidade + 
+                            "\nESTADO: " + imovel[j].estado +
+                            "\nPAIS: " + imovel[j].pais +
+                            "\nCEP: " + imovel[j].cep +
+                            "\nTIPO: " + imovel[j].tipo +
+                            "\nGARAGEM: " + imovel[j].garagem +
+                            "\nSUITES: " + imovel[j].suites +
+                            "\nQUARTOS: " + imovel[j].quartos +
+                            "\nSEGURANÇA: " + imovel[j].seguranca +
+                            "\nVALOR DO IMOVEL: " + imovel[j].valorimovel + 
+                            "\nVALOR DO CONDOMINIO: " + imovel[j].valorcondominio + "\n";
+                        }
+                        
+                    } 
+                }
+            }
+            alert(str);
+        }
+
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Imobiliaria União</h1>
+        <h2>Relatorio</h2>
+    </header>
+    <article>
+        <form class="principal">
+        <label for="telefoneX">Pessoas com mais de X telefones incluidos:</label><br>
+        <input type="number" id="telefoneX">
+        </form>
+        <button onclick=" NumeroTelefone()" class="botao">Verificar</button>
+        <div id="ForTelefone" class="principal"></div>
+
+
+        <form class="principal">
+            <label for="seguranca">Imoveis com item de segurança:</label><br>
+            <select id="seguranca">
+                <option hidden="true"></option>
+                <option value="Portaria">Portaria</option>
+                <option value="GuardaNoturno">Guarda Noturno</option>
+                <option value="PortariaEGuarda">Portaria e Guarda Noturno</option>
+                <option value="zero">Sem item de segurança</option>
+            </select>
+        </form class="principal">
+        <button onclick="seguranca()" class="botao">Verificar</button>
+        <div id="ForSeguranca" class="principal"></div>
+
+
+        <form class="principal">
+            <label for="inicio">Data Inicial:</label><br>
+            <input type="date" id="inicio"><br>
+            <label for="fim">Data Limite:</label><br>
+            <input type="date" id="fim"><br><br>
+            
+        </form>
+        <button onclick="data()" class="botao" id="data">Verificar</button>
+    </article>
+
+
+</body>
+</html>
